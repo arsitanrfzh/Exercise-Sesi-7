@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./exercise-no-6.css">
+    <title>Registrasi</title>
+</head>
+<body>
+    <div class="container">
+    <form action="/action_page.php" method="POST">
+        <fieldset>
+        <legend>Login</legend>
+        <p>
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Username minimal 6 karakter" required minlength="6" maxlength=" " id="fusername"/>
+        </p>
+        <p>
+            <label>Password:</label>
+            <input type="password" placeholder="Password minimal 8 karakter" required minlength="8" maxlength=" " value='' id="fpassword"/><br><br>
+            <input type="checkbox" onclick="myFunction()">Show Password
+            
+        </p>
+        <p>
+            <input type="submit" onClick="validasi(), add()" name="submit" value="Submit" />
+            <ul id="tampil"></ul>
+        </p>
+        </fieldset>
+    </form>
+    </div>
+
+    <script>
+        function myFunction() {
+            let name = document.getElementById("fpassword");
+            if (name.type === "password") {
+                name.type = "text";
+            } else {
+                name.type = "password";
+            }
+        }
+        
+        //Validasi JavaScript//
+        //fungsi length password//
+            function lengthPassword(nilai, pesan) {
+                let lengthPasswordExp = /^[8,]+$/;
+                if(nilai.value.match(lengthPasswordExp)) {
+                    return true;
+                }
+                else {
+                    alert(pesan);
+                    nilai.focus();
+                    return false;
+                }
+            }
+
+            //fungsi length username//
+            function lengthUsername(nilai, pesan) {
+                let lengthUsernameExp = /^[6,]+$/;
+                if(nilai.value.match(lengthUsernameExp)) {
+                    return true;
+                }
+                else {
+                    alert(pesan);
+                    nilai.focus();
+                    return false;
+                }
+            }
+           
+            function validasi() {
+                lengthPassword(document.getElementById('fpassword'), 'Password minimal 8 karakter');
+                lengthUsername(document.getElementById('fusername'), 'Username minimal 6 karakter!');
+            }
+            
+            //fungsi menampilkan data array//
+            let tampung_array = [];
+            
+            function add() {
+                let masukan = document.getElementById('fusername', 'fpassword');
+                tampung_array.push(masukan.value);
+                masukan.value = ' ';
+                show();
+            }
+            
+            function show() {
+                let html = '';
+                for (let i=0; i<tampung_array.length; i++) {
+                    html += '<li>' + tampung_array[i] + '</li>';
+                }
+                let tampil = document.getElementById('tampil');
+                tampil.innerHTML = html;
+            }
+      </script>
+</body>
